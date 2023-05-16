@@ -1,1 +1,24 @@
-<p>category-list works!</p>
+<h1>Lista de Categorias</h1>
+
+<table>
+    <thead>
+        <th>Id</th>
+        <th>Imagen</th>
+        <th>Categoria</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categories">
+            <td>{{category.id}}</td>
+            <td>
+                <img class="imgCategory" [src]="'data:image/webp;base64,' + category.image">
+            </td>
+            <td>{{category.name}}</td>
+            <td>
+                <button id="btnNavToCategoryItems">Articulos</button>
+                <button id="btnEditCategory">Editar</button>
+                <button id="btnDeleteCategory">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
