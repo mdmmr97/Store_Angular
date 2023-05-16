@@ -1,6 +1,6 @@
 import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { CategoryListComponent } from './entities/category/category-list/categor
 import { CategoryFormComponent } from './entities/category/category-form/category-form.component';
 import { ItemListComponent } from './entities/item/item-list/item-list.component';
 import { ItemFormComponent } from './entities/item/item-form/item-form.component';
+import { HttpRequestIntercept } from './config/interceptors/http-request-interceptors.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,11 @@ import { ItemFormComponent } from './entities/item/item-form/item-form.component
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpRequestIntercept,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
