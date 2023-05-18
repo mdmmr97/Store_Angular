@@ -22,6 +22,9 @@ export class ItemListComponent implements OnInit{
   totalPages: number = 0;
   totalElements: number = 0;
 
+  nameFilter?: string;
+  priceFilter?: number;
+
   constructor(
     private route:ActivatedRoute,
     private itemService: ItemService
@@ -38,19 +41,6 @@ export class ItemListComponent implements OnInit{
     }
   }
 
-  private getAllItems(): void {
-    this.itemService.getAllItems(this.page,this.size,this.sort).subscribe({
-      next: (data: any) => {
-        this.items = data.content; 
-        this.first = data.first;
-        this.last = data.last;
-        this.totalPages = data.totalPages;
-        this.totalElements = data.totalElements;
-      },
-      error: (err) => {this.handleError(err); }
-    })
-  }
-
   public nextPage(): void{
     this.page++;
     this.getAllItems();
@@ -60,6 +50,47 @@ export class ItemListComponent implements OnInit{
     this.page--;
     this.getAllItems();
   }
+
+  public searchByFilters():void{
+    this.getAllItems();
+
+  }
+
+  private buildFilters(): string | undefined {
+    const filters: string[] = [];
+    if(this.nameFilter){
+      filters.push("name:MATCH:"+this.nameFilter);
+    }
+    if(this.priceFilter){
+      filters.push("price:LESS_THAN_EQUAL:"+this.priceFilter);
+    }
+    if(filters.length>0){
+      let globalFilters: string = "";
+      for (let filter of filters){
+        globalFilters = globalFilters + filter + ",";
+      }
+      globalFilters = globalFilters.substring(0,globalFilters.length-1);
+      return globalFilters; 
+    }
+    else{
+      return undefined;
+    }
+  }
+
+  private getAllItems(): void {
+    const filters:string | undefined = this.buildFilters();
+    
+      this.itemService.getAllItems(this.page,this.size,this.sort, filters).subscribe({
+        next: (data: any) => {
+          this.items = data.content; 
+          this.first = data.first;
+          this.last = data.last;
+          this.totalPages = data.totalPages;
+          this.totalElements = data.totalElements;
+        },
+        error: (err) => {this.handleError(err); }
+      })
+    }
 
   private getAllItemsInCategory(categoryId: number): void {
     this.itemService.getAllItemsByCategoryId(categoryId).subscribe({

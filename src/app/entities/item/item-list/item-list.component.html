@@ -1,5 +1,23 @@
 <h1>{{title}}</h1>
 
+<form>
+    <div class="row">
+        <!--Name-->
+        <div class="form-group" class="col-12 col-md-6">
+            <label for="name">Name</label>
+            <input type="text" [(ngModel)]="nameFilter" name="name">
+        </div>
+        <!--Precio-->
+        <div class="form-group" class="col-12 col-md-3">
+            <label for="name">Price</label>
+            <input type="number" [(ngModel)]="priceFilter" name="price">
+        </div>
+    </div>
+    <div class="col-12 col-md-3">
+        <button id="btnSearch" class="btn btn-secondary" (click)="searchByFilters()">Buscar</button>
+    </div>
+</form>
+
 <table *ngIf="items.length > 0">
     <thead>
         <th>Id</th>
