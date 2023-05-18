@@ -14,7 +14,7 @@ export class ItemListComponent implements OnInit{
   title: string = "";
   items: Item[] = [];
   page:number = 0;
-  size: number = 1;
+  size: number = 5;
   sort:string = "name,asc";
 
   first: boolean = false;
@@ -34,11 +34,10 @@ export class ItemListComponent implements OnInit{
     if (this.route.snapshot.paramMap.get("categoryId")){
       this.categoryId = +this.route.snapshot.paramMap.get("categoryId")!;
       this.title = "Articulos de la categoria " + this.categoryId;
-      this.getAllItemsInCategory(this.categoryId)
     } else {
       this.title = "Lista de articulos";
-      this.getAllItems();
     }
+    this.getAllItems();
   }
 
   public nextPage(): void{
@@ -58,6 +57,10 @@ export class ItemListComponent implements OnInit{
 
   private buildFilters(): string | undefined {
     const filters: string[] = [];
+
+    if(this.categoryId){
+      filters.push("category.id:EQUAL:"+this.categoryId);
+    }
     if(this.nameFilter){
       filters.push("name:MATCH:"+this.nameFilter);
     }
@@ -91,13 +94,6 @@ export class ItemListComponent implements OnInit{
         error: (err) => {this.handleError(err); }
       })
     }
-
-  private getAllItemsInCategory(categoryId: number): void {
-    this.itemService.getAllItemsByCategoryId(categoryId).subscribe({
-      next: (itemsRequest) => {this.items = itemsRequest; },
-      error: (err) => {this.handleError(err); }
-    })
-  }
 
   private handleError(error: any): void {
     //mensaje error
