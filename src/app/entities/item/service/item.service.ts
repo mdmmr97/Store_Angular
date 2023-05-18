@@ -10,8 +10,8 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllItems(): Observable<Item[]>{
-    const urlEndpoint: string = "http://localhost:8080/store/items";
+  public getAllItems(page: number, size:number, sort: string): Observable<Item[]>{
+    const urlEndpoint: string = "http://localhost:8080/store/items?page="+page+"&size="+size+"&sort="+sort;
     return this.http.get<Item[]>(urlEndpoint);
   }
 
