@@ -29,6 +29,6 @@
         <input type="text" [(ngModel)]="item.image" name="image" class="form-control" id="iamge" #image="ngModel">
     </div>
     <div class="buttonsForm">
-        <button>Guardar</button>
+        <button (click)="saveItem()">Guardar</button>
     </div>
 </form>

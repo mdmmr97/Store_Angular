@@ -32,6 +32,35 @@ export class ItemFormComponent implements OnInit{
     }
   }
 
+  public saveItem():void {
+    if(this.mode === "NEW"){
+      this.insertItem();
+    }
+    if(this.mode === "UPDATE"){
+      this.updateItem();
+    }
+  }
+
+  private insertItem():void {
+    this.itemService.insertItem(this.item!).subscribe({
+      next: (itemInserted) => {
+        console.log("Insertado Correctamente");
+        console.log(itemInserted);
+      },
+      error: (err) => {this.handleError(err);}
+    })
+  }
+
+  private updateItem():void {
+    this.itemService.updateItem(this.item!).subscribe({
+      next: (itemUpdated) => {
+        console.log("Modificado Correctamente");
+        console.log(itemUpdated);
+      },
+      error: (err) => {this.handleError(err);}
+    })
+  }
+
   private getItemById(itemId: number){
     this.itemService.getItemById(itemId).subscribe({
       next: (itemRequest) => {this.item = itemRequest},
