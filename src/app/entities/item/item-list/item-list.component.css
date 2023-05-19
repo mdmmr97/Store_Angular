@@ -1,3 +1,43 @@
+table {
+    width: 100%;
+    border: 1px solid #000;
+}
+th, td {
+    text-align: center;
+    vertical-align: top;
+    border: 2px solid lightskyblue;
+
+}
+th{
+    background-color:rgb(108, 119, 214);
+    color: white;
+
+}
+td {
+    padding: 10px;
+}
+
+.botoneraPaginacion{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.row{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    background-color: rgb(133, 133, 236);
+    color: white;
+    border: 2px solid white;
+}
+
 .imgItem{
     width: 80px;
 }

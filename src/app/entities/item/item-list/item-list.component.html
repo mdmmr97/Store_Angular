@@ -12,10 +12,11 @@
             <label for="name">Price</label>
             <input type="number" [(ngModel)]="priceFilter" name="price">
         </div>
+        <div class="col-12 col-md-3">
+            <button id="btnSearch" class="btn btn-secondary" (click)="searchByFilters()">Buscar</button>
+        </div>
     </div>
-    <div class="col-12 col-md-3">
-        <button id="btnSearch" class="btn btn-secondary" (click)="searchByFilters()">Buscar</button>
-    </div>
+    
 </form>
 
 <div id="buttonCreateContainer" class="row">
