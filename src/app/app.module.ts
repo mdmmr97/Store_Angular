@@ -2,7 +2,7 @@ import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { ItemFormComponent } from './entities/item/item-form/item-form.component
 import { HttpRequestIntercept } from './config/interceptors/http-request-interceptors.interceptor';
 
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ItemReactiveFormComponent } from './entities/item/item-reactive-form/item-reactive-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     CategoryListComponent,
     CategoryFormComponent,
     ItemListComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    ItemReactiveFormComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AutoCompleteModule
   ],
   providers: [{
